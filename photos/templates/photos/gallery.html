@@ -1,0 +1,64 @@
+{% extends "base.html" %} {% load static %} 
+{% block headername %} gallery {%endblock %} {% block content %}
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card" style="width: 18rem">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <a href="{% url 'gallery'%}" style="text-decoration:None ; color:black" >ALL</a></li>
+          
+          {% for category in cat %}
+          
+          
+          <li class="list-group-item ">
+            <a style="text-decoration: none; color: black;" href="{% url 'gallery' %}?category={{category.name}}">
+                {{category.name}}
+            </a>
+          </li>
+
+
+          {% endfor %}
+            
+          <a href="{% url 'add' %}" class='btn btn-outline-success btn-block btn-sm m-1'>Add Photo</a>
+
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+
+            
+            {% for phot in photo %}
+                
+
+                
+            <div class="col-md-4">
+                                
+                <div class="card my-2" style="width: 18rem;">
+                    <img src="{{phot.image.url}}" class="image-thumbnail" style="image:cover" alt="">
+                    <div class="card-body">
+                      <p class="card-title">{{phot.description}}</p>
+                      <small class="fw-medium" > category : {{phot.category.name}}</small>
+                      <a class="btn btn-outline-dark btn-sm m-1" href="{% url 'photo'  phot.id %}">View</a>
+                      <a href="{% url 'delete' phot.id%}">delete</a>
+                    </div>
+                  </div>
+                </div>
+
+                {%empty%}
+                <h3>no photo</h3>
+
+
+            {% endfor %}
+                
+
+    </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

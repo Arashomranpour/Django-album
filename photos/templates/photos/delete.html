@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% load static %} 
+{% block headername %} photo delete {%endblock %}
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <p>are you sure {{object}}?</p>
+
+    <input type="submit" class="btn btn-danger my-4" value="delete">
+
+
+
+    <a href="{% url 'gallery'%}" class="btn btn-dark my-4">Back</a>
+
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% load static %} 
+{% block headername %} add photo {%endblock %} 
+{% block content %}
+
+<div class="d-flex justify-content-center">
+    <div class="container justify-content-center text-center">
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Select your Image(s) :</label>
+                        <input required class="form-control" name="images" multiple type="file" id="formFile">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="formFile12" class="form-label">Select Category :</label>
+                        <select class="form-control" name="Category" id="formFile12">
+                        <option value="None">Select Category </option>
+                        
+                        {% for cate in cat %}
+                        <option value="{{cate.id}}">{{cate.name}} </option>
+                            
+                        {% endfor %}
+                            
+                        </select>
+                      </div>
+ 
+                      <div class="mb-3">
+                        <label for="formFile13" class="form-label">Create New Category</label>
+                        <input class="form-control" type="text"  name="Category_new" id="formFile13">
+                      </div>
+
+                        <div class="mb-3">
+                        <label for="formFile1" class="form-label">Description :</label>
+                        <input required class="form-control" type="text" placeholder="Enter Description" name="Description" id="formFile1">
+                      </div>
+
+
+                      <button type="submit" class="btn btn-primary m-3">Submit</button>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<a href="{% url 'gallery'%}" class="btn btn-dark my-4">Back</a>
+
+{% endblock content %}
